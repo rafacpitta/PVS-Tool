@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import os
 
 arquivos = []
-for arqv in os.listdir('D:\users\F65605B\Documents\Rafael Pitta\PyFCA\PyData'):
+for arqv in os.listdir('C:\Users\Rafael Pitta\Documents\Projects\FCAnalysis'):
     if arqv.endswith('.mdf'):
         arquivos.append(arqv)
 qtde = len(arquivos)
@@ -18,16 +18,20 @@ y_trend = [0]*qtde
 percentual = [0]*qtde
 temp = 0
 cnt = 0
+
+pedal_str = 'PTC_PDL_PCT'
+pvs_str = 'DELPVS'
+
 for i in arquivos:
-	pedal[cnt] = mdf.mdf('PyData/' + i,convertAfterRead=False).getChannelData('PTC_PDL_PCT')
-	pvs[cnt] = mdf.mdf('PyData/' + i,convertAfterRead=False).getChannelData('LV2_PVS_NORM')
+	pedal[cnt] = mdf.mdf(i,convertAfterRead=False).getChannelData(pedal_str)
+	pvs[cnt] = mdf.mdf(i,convertAfterRead=False).getChannelData(pvs_str)
 	cnt += 1
 
 for i in xrange(cnt):
     plt.plot(pvs[i],pedal[i],'bo', ms = '0.7')
     plt.show()
-    plt.xlabel('Pedal voltage (V)')
-    plt.ylabel('Pedal percentage (%)')
+    plt.xlabel(pvs_str + '(V)')
+    plt.ylabel(pedal_str + '(%)')
     trend[i] = linregress(pvs[i],pedal[i])
     y_trend[i] = trend[i].intercept + trend[i].slope*pedal[i]
     a_trendstr[i] = repr(trend[i].slope)
