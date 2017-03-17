@@ -26,7 +26,7 @@ def regression(x,y,f):
 	
 	trend = linregress(x, y)
 	y_trend = trend.intercept + trend.slope*y
-	temp = 100*(float(trend.intercept))
+	temp = 100*trend.intercept
 	print '\ny = (' + str(trend.slope) + ') * x + (' + str(trend.intercept) + ')\tfor ' + f
 
 def plotting_xy(data):
