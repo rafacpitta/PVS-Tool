@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import os
 
 arquivos = []
-for arqv in os.listdir('D:\users\F65605B\Documents\Rafael Pitta\A Python Directory\PyData'):
+for arqv in os.listdir('D:\users\F65605B\Documents\Rafael Pitta\PyFCA\PyData'):
     if arqv.endswith('.mdf'):
         arquivos.append(arqv)
 qtde = len(arquivos)
@@ -26,8 +26,8 @@ for i in arquivos:
 for i in xrange(cnt):
     plt.plot(pvs[i],pedal[i],'bo', ms = '0.7')
     plt.show()
-    plt.xlabel('LV2_PVS_NORM (V)')
-    plt.ylabel('PTC_PDL_PCT (%)')
+    plt.xlabel('Pedal voltage (V)')
+    plt.ylabel('Pedal percentage (%)')
     trend[i] = linregress(pvs[i],pedal[i])
     y_trend[i] = trend[i].intercept + trend[i].slope*pedal[i]
     a_trendstr[i] = repr(trend[i].slope)
