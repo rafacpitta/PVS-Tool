@@ -5,12 +5,16 @@ import sys
 def plotting_xy(data):
 	for i in xrange(len(data)):
 	
-		plt.plot(data[i][x_str]['data'], data[i][y_str]['data'], 'bo', ms = '0.7')
-		plt.xlabel(x_str + '(' + str(data[i][x_str]['unit']) + ')')
-		plt.ylabel(y_str + '(' + str(data[i][y_str]['unit']) + ')')
-		plt.show()
+		try:
+			plt.plot(data[i][x_str]['data'], data[i][y_str]['data'], 'bo', ms = '0.7')
+			plt.xlabel(x_str + '(' + str(data[i][x_str]['unit']) + ')')
+			plt.ylabel(y_str + '(' + str(data[i][y_str]['unit']) + ')')
+			plt.show()
 	
-		af.regression(data[i][x_str]['data'], data[i][y_str]['data'], arquivos[i])
+			af.regression(data[i][x_str]['data'], data[i][y_str]['data'], arquivos[i])
+		except:
+			print 'Variables with different raster'
+			sys.exit()
 
 while True:
 	dat, arquivos = af.read_files()
